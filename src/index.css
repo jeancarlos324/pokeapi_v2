@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  --color-red: #ef4444;
+  --color-white: #ffffff;
+  --color-gray: rgb(51, 65, 85);
+}
+
+* {
+  font-family: "Signika Negative", sans-serif;
+
+  cursor: url("svg/cursor-red.svg"), auto;
+}
+input {
+  outline: transparent;
+  padding-left: 5px;
+}
+input[type="text"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 0px;
+}
+
+/* Track */
+*::-webkit-scrollbar-track {
+  background: #ffffff2f;
+  border-radius: 15px;
+}
+*::-webkit-scrollbar-thumb {
+  background: #838383d0;
+  border-radius: 15px;
+}
+
+.button-pokemon {
+  background-image: url("/src/assets/Poké_Ball_icon.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  color: rgb(51 65 85);
+  width: 100%;
+  height: 100%;
+  font-size: 130%;
+  padding: 0px;
+  text-align: center;
+}
+.button-pages {
+  color: var(--color-gray);
+  background-color: var(--color-white);
+  width: 60%;
+  height: 100%;
+  font-size: 130%;
+  padding: 0px;
+  text-align: center;
+  border-radius: 5px;
+  border-width: 2.5px;
+  border-color: var(--color-red);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.option-type {
+  padding: 0px 10px;
+  color: var(--color-gray);
+  font-size: 16px;
+}
+
+option:hover {
+  background-color: var(--color-red);
+}
+
+.animation-frame {
+  animation: spinner 4s linear infinite;
+  z-index: -1;
+}
+.portal {
+  animation: portal 5s linear infinite;
+}
+
+@keyframes spinner {
+  0% {
+    opacity: 1;
+    scale: 0.9;
+  }
+  25% {
+    opacity: 0.9;
+    scale: 1;
+  }
+  50% {
+    opacity: 1;
+    scale: 0.9;
+  }
+  75% {
+    opacity: 1;
+    scale: 1;
+  }
+  100% {
+    opacity: 1;
+    scale: 0.9;
+  }
+}
+
+@keyframes portal {
+  0% {
+    opacity: 0.8;
+    transform: rotate(0deg);
+  }
+  25% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.6;
+    transform: rotate(360deg);
+  }
+}
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: #4caf50;
+  color: white;
+  border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+  border-radius: 5px;
+}
+
+.home {
+  background-image: url("../src/assets/background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -10px;
+}
+
+.pokedex-details {
+  /* background-image: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/80ff523f-ff84-457d-a547-464588d3a3d3/den4zwg-45a7fe9e-d38a-417c-815c-3e56972adf62.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzgwZmY1MjNmLWZmODQtNDU3ZC1hNTQ3LTQ2NDU4OGQzYTNkM1wvZGVuNHp3Zy00NWE3ZmU5ZS1kMzhhLTQxN2MtODE1Yy0zZTU2OTcyYWRmNjIuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.7r4EFNYAQGlxIBpSStqPW7uUrRjCqTi_8d7u3CnHUko"); */
+  background-image: url("https://m.media-amazon.com/images/I/31ib8DJcJiL._AC_UF350,350_QL80_.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.pokedex {
+  /* background-image: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/80ff523f-ff84-457d-a547-464588d3a3d3/den4zwg-45a7fe9e-d38a-417c-815c-3e56972adf62.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzgwZmY1MjNmLWZmODQtNDU3ZC1hNTQ3LTQ2NDU4OGQzYTNkM1wvZGVuNHp3Zy00NWE3ZmU5ZS1kMzhhLTQxN2MtODE1Yy0zZTU2OTcyYWRmNjIuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.7r4EFNYAQGlxIBpSStqPW7uUrRjCqTi_8d7u3CnHUko"); */
+  background-image: url("image/background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}

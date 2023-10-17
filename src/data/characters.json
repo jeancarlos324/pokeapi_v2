@@ -1,0 +1,32 @@
+[
+  {
+    "id": "01",
+    "name": "bulbasaur",
+    "image":"https://i.pinimg.com/originals/74/5d/93/745d9341c05c72d3c2f64fc50fb7504d.png"
+  },
+  {
+    "id": "02",
+    "name": "woobofet",
+    "image":"https://w0.peakpx.com/wallpaper/965/465/HD-wallpaper-pokemon-smile-mouth-face-smile-pokemon-eyes.jpg"
+  },
+  {
+    "id": "03",
+    "name": "charmander",
+    "image":"https://pm1.narvii.com/6260/95f9a0a8d341067bdb1b1013c6e7e2a6e4b1999b_hq.jpg"
+  },
+  {
+    "id": "04",
+    "name": "pikachu",
+    "image":"https://i.pinimg.com/originals/61/b0/9f/61b09f83f88776a7bb3149fbc0e0de00.jpg"
+  },
+  {
+    "id": "05",
+    "name": "ghost",
+    "image":"https://i.pinimg.com/550x/9f/f2/63/9ff263f199ea80c06af7fc14b6189b3b.jpg"
+  },
+  {
+    "id": "06",
+    "name": "singsing",
+    "image":"https://i.pinimg.com/originals/d7/7d/02/d77d02435889a16483aae5b21ca8ef5c.jpg"
+  }
+]
