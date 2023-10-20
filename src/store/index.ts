@@ -3,6 +3,7 @@ import avatarSlice from "./slice/avatar.slice";
 import loadingScreenSlice from "./slice/loadingScreen";
 import typePokemonSlice from "./slice/typePokemon.slice";
 import userTrainerSlice from "./slice/userTrainer.slice";
+import pokemonListSlice from "./slice/pokemonList.slice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     userTrainer: userTrainerSlice,
     avatar: avatarSlice,
     setLoadingScreen: loadingScreenSlice,
+    pokemonListSlice,
   },
 });
 

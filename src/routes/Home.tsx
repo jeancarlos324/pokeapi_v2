@@ -1,43 +1,45 @@
-import { useCallback, useEffect } from "react";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { changeName } from "../store/slice/userTrainer.slice";
-import { motion } from "framer-motion";
-import characters from "../data/characters.json";
-import { changeAvatar } from "../store/slice/avatar.slice";
-import { Characters } from "../types/types";
-import Button from "../components/share/Button";
+// import { useCallback, useEffect } from "react";
+// import { useState } from "react";
+// import { useDispatch } from "react-redux";
+// import { useNavigate, useRouteError } from "react-router-dom";
+// import { changeName } from "../store/slice/userTrainer.slice";
+// import { motion } from "framer-motion";
+// import characters from "../data/characters.json";
+// import { changeAvatar } from "../store/slice/avatar.slice";
+// import { Characters } from "../types/types";
+// import Button from "../components/share/Button";
 
 const Home = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [newAvatar, setNewAvatar] = useState<Characters[]>([]);
-  const [userName, setUserName] = useState("");
-  const [numPages, setNumPages] = useState(0);
-  const listCharacters = characters as Characters[];
+  // const navigate = useNavigate();
+  // const dispatch = useDispatch();
+  // const [newAvatar, setNewAvatar] = useState<Characters[]>([]);
+  // const [userName, setUserName] = useState("");
+  // const [numPages, setNumPages] = useState(0);
+  // const listCharacters = characters as Characters[];
 
-  const quantityPerPage = 1;
-  const totalPages = Math.ceil(listCharacters.length / quantityPerPage);
+  // const quantityPerPage = 1;
+  // const totalPages = Math.ceil(listCharacters.length / quantityPerPage);
 
-  const setNewAvatares = useCallback(() => {
-    const firstItemPage = numPages * quantityPerPage;
-    const lastItemPage = (numPages + 1) * quantityPerPage;
-    setNewAvatar(listCharacters.slice(firstItemPage, lastItemPage));
-  }, [numPages, listCharacters]);
+  // const setNewAvatares = useCallback(() => {
+  //   const firstItemPage = numPages * quantityPerPage;
+  //   const lastItemPage = (numPages + 1) * quantityPerPage;
+  //   setNewAvatar(listCharacters.slice(firstItemPage, lastItemPage));
+  // }, [numPages, listCharacters]);
 
-  useEffect(() => {
-    setNewAvatares();
-  }, [setNewAvatares]);
+  // useEffect(() => {
+  //   setNewAvatares();
+  // }, [setNewAvatares]);
 
-  const dispatchUserName = () => {
-    dispatch(changeName(userName));
-    navigate("/pokedex");
-  };
-
+  // const dispatchUserName = () => {
+  //   dispatch(changeName(userName));
+  //   navigate("/pokedex");
+  // };
+  // const ga = 1 /0;
+  // const error = useRouteError();
   return (
     <div className="h-screen w-screen flex justify-center items-center bg-gradient-to-r from-yellow-400 to-red-500">
-      <div className=" w-full md:w-3/5  h-full flex flex-col items-center justify-center gap-5">
+      hola
+      {/* <div className=" w-full md:w-3/5  h-full flex flex-col items-center justify-center gap-5">
         <div className="w-[90%] md:w-2/3">
           <img src="image/Pokemon 2.svg" alt="" className="animation-frame" />
         </div>
@@ -100,7 +102,7 @@ const Home = () => {
       </div>
       <div className="hidden w-0 md:flex md:w-2/5 h-full">
         <img src="/image/background.jpg" alt="" className="h-full w-full" />
-      </div>
+      </div> */}
     </div>
   );
 };

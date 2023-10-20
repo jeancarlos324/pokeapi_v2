@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
+import { RefObject, useCallback, useEffect, useRef, useState } from "react";
 // import Card from "../components/Card";
+import { motion } from "framer-motion";
 import Button from "../components/share/Button";
 // import PokemonInputType from "../components/input/PokemonInputType";
 // import PokemonCharacter from "../components/input/PokemonCharacter";
@@ -12,49 +13,41 @@ import { ListPokemon } from "../types/types";
 import { PokemonClient } from "pokenode-ts";
 import type { Pokemon } from "pokenode-ts";
 import CardPokemon from "../components/cards/CardPokemon";
-
+import "./pokedex.css";
+import { useAnimation } from "framer-motion";
+import Header from "../components/header";
 const Pokedex = () => {
   const { name: pokemonName } = useParams();
-  const [pokemons, setPokemons] = useState<ListPokemon[]>([]);
+  const controls = useAnimation();
+  const containerRef: RefObject<HTMLDivElement> = useRef(null);
+  const pokemons = useSelector((state: RootState) => state.pokemonListSlice);
   const [pokemonsSilce, setPokemonsSlice] = useState<ListPokemon[]>([]);
   const [numPages, setNumPages] = useState(0);
   const [typeIsActive, setTypeIsActive] = useState(false);
-
+  const [loadingScreen, setLoadingScreen] = useState(false);
   const navigate = useNavigate();
   const trainer = useSelector((state: RootState) => state.userTrainer);
-  const avatar = useSelector((state: RootState) => state.avatar);
+  // const avatar = useSelector((state: RootState) => state.avatar);
   const dispatch = useDispatch();
 
-  const quantityPerPage = 12;
-  const totalPages = Math.ceil(pokemons.length / quantityPerPage);
+  const quantityPerPage = 24;
+  const totalPages = Math.ceil(pokemons!.length / quantityPerPage);
   const firstItemPage = numPages * quantityPerPage;
   const lastItemPage = (numPages + 1) * quantityPerPage;
 
-  useEffect(() => {
-    getPokemons();
-  }, []);
-
-  const getPokemons = () => {
-    // dispatch(setLoadingScreen(true));
-    axiosInstance.get(`/pokemon?limit=200&offset=0`).then((res) => {
-      setPokemons(res.data.results);
-    });
-    // .finally(() => dispatch(setLoadingScreen(false)));
-  };
-
   const setPagePokemons = useCallback(() => {
-    setPokemonsSlice(pokemons.slice(firstItemPage, lastItemPage));
+    setPokemonsSlice(pokemons!.slice(firstItemPage, lastItemPage));
   }, [pokemons, firstItemPage, lastItemPage]);
 
   useEffect(() => {
     setPagePokemons();
   }, [setPagePokemons]);
 
-  // const pages = new Array(totalPages).fill(0).map((item, index) => {
-  //   let sum = 0;
-  //   sum = index + 1;
-  //   return item + sum;
-  // });
+  const pages = new Array(totalPages).fill(0).map((item, index) => {
+    let sum = 0;
+    sum = index + 1;
+    return item + sum;
+  });
 
   // const dispatchTypePokemon = (e) => {
   //   dispatch(setLoadingScreen(true));
@@ -77,95 +70,94 @@ const Pokedex = () => {
   //   setPokemons(newArray);
   // };
 
+  const handleCenterElement = (element: string) => {
+    const container = containerRef.current;
+    const selectedElement = document.getElementById(element);
+    if (container && selectedElement) {
+      const { offsetTop, clientHeight } = container;
+      const { offsetTop: offsetTopE } = selectedElement;
+      const top = offsetTopE - offsetTop - clientHeight / 3;
+      const behavior = "smooth";
+      container.scrollTo({ top, behavior });
+    }
+  };
   const handleNavigateToPokemon = (name: string) => {
+    handleCenterElement(name);
     navigate(`/pokedex/${name}`);
   };
 
+  const handlePreviusPage = () => {
+    numPages == 0 ? setNumPages(0) : setNumPages(numPages - 1);
+  };
+  const handleNextPage = () => {
+    numPages < totalPages - 1
+      ? setNumPages(numPages + 1)
+      : setNumPages(totalPages - 1);
+  };
+
   return (
-    <div className=" container w-full h-full m-auto ">
-      {/* <p className="flex gap-5 w-full bg-gradient-to-r from-red-500 to-yellow-400 p-2 capitalize text-[20px] text-white">
-        <img
-          src={avatar}
-          className=" object-cover w-[100px] h-[100px] border-2 rounded-xl"
-        />
-        <div className="flex flex-col justify-start">
-          <span>Wellcome</span>
-          <span className="text-slate-800 uppercase font-semibold">
-            {trainer}
-          </span>
-          <span>here you can see all the pokemons in the world!!</span>
-        </div>
-      </p> */}
-      {/* <Button
-        className="bg-red-500 px-2 rounded-xl text-white"
-        onClick={() => setTypeIsActive(!typeIsActive)}
-        text={typeIsActive ? "Search by Character" : "Search by Type"}
-      /> */}
-      {/* {typeIsActive ? (
-        <PokemonInputType
-          className=" w-[90%] md:w-1/3"
-          onChange={dispatchTypePokemon}
-        />
-      ) : (
-        <PokemonCharacter
-          addPokemon={searchPokemon}
-          className=" w-[90%] md:w-1/3"
-        />
-      )}
-      <div className=" w-[90%] md:w-2/3 flex flex-col">
-        <h2 className="flex justify-center uppercase font-medium text-center gap-2">
-          <span>Page:</span>
-          <b>{numPages + 1}</b>
-        </h2>
-        <div className="w-full flex justify-around">
-          <Button
-            text="<"
-            className="button-pages"
-            onClick={() =>
-              numPages == 0 ? setNumPages(0) : setNumPages(numPages - 1)
-            }
-          />
-          <button style={{ textUnderlineOffset: "2px" }}></button>
-          {pages.map((button) => (
-            <Button
-              key={button}
-              className="button-pokemon"
-              text={button}
-              onClick={() => setNumPages(button - 1)}
-            />
-          ))}
-          <Button
-            text=">"
-            className="button-pages"
-            onClick={() =>
-              numPages < totalPages - 1
-                ? setNumPages(numPages + 1)
-                : setNumPages(totalPages - 1)
-            }
-          />
-        </div>
-      </div>*/}
-      <div className={pokemonName ? "bg-red-400" : "bg-blue-200"}>gaaa</div>
-      <div className="w-full flex max-h-[96%] sm:max-h-[85%] gap-2">
+    <div className="container relative justify-end w-full py-1 h-[92vh] md:h-[91vh] m-auto flex gap-3">
+      <div
+        className={`${
+          pokemonName ? "hidden" : "flex"
+        } w-full sm:flex flex-col gap-2 relative mt-auto h-[100%]`}
+      >
         <div
-          className={`${
-            pokemonName ? "hidden" : "flex"
-          } sm:flex justify-center flex-wrap overflow-auto px-5 sm:px-0 pt-5 sm:pt-0 gap-5 sm:gap-2  grow`}
+          className={`flex justify-center flex-wrap px-5 sm:px-0 gap-5 sm:gap-2 grow overflow-y-auto`}
+          ref={containerRef}
         >
           {pokemonsSilce.map((pokemon) => (
             <CardPokemon
+              id={pokemon.name}
               key={pokemon.url}
               url={pokemon.url}
               className={
-                pokemonName && pokemonName !== pokemon.name ? "opacity-40" : ""
+                pokemonName && pokemonName !== pokemon.name
+                  ? "opacity-40 hover:opacity-80"
+                  : ""
               }
               isSelected={pokemonName !== pokemon.name}
               onClick={() => handleNavigateToPokemon(pokemon.name)}
             />
           ))}
+          <div className="w-full bg-[#323232] sticky -bottom-[1px] justify-around flex gap-1 md:gap-2 px-1 h-8 sm:h-9 sm:pt-2 ">
+            <Button
+              icon="angle"
+              className="bg-red-500 rotate-180 rounded-sm"
+              onClick={handlePreviusPage}
+            />
+            {pages.map((button, i) => {
+              const size = window.innerWidth;
+              const isMovil = size < 780;
+              const pagesQuantity = isMovil ? 2 : 3;
+              const isVisible =
+                i <= (isMovil ? 0 : 1) ||
+                pages.length - (isMovil ? 1 : 2) <= i ||
+                (numPages - pagesQuantity < i && i < numPages + pagesQuantity);
+              return (
+                <Button
+                  key={button}
+                  className={` text-white
+                ${
+                  isVisible
+                    ? "border-2 border-red-500 rounded-sm w-10 "
+                    : "bg-red-500 hidden md:block mt-auto h-1 md:h-2 w-1 md:w-2 rounded-md "
+                }
+                ${numPages === i && "bg-red-500 rounded-sm"}`}
+                  text={!isVisible ? "" : button}
+                  onClick={() => setNumPages(button - 1)}
+                />
+              );
+            })}
+            <Button
+              icon="angle"
+              className="bg-red-500 rounded-sm"
+              onClick={handleNextPage}
+            />
+          </div>
         </div>
-        <Outlet />
       </div>
+      <Outlet />
     </div>
   );
 };

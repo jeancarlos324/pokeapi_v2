@@ -4,20 +4,26 @@ interface ButtonProps {
   className?: string;
   onClick?: () => void;
   disabled: boolean;
+  icon?: string;
   style?: MotionStyle;
 }
 
-const Button = ({ text, className, onClick, disabled, style }: ButtonProps) => {
+const Button = ({
+  text,
+  className,
+  onClick,
+  disabled,
+  icon,
+  style,
+}: ButtonProps) => {
   return (
     <motion.button
-      className={`${className}`}
-      whileHover={{ scale: 1.2 }}
-      whileTap={{ scale: 0.9 }}
+      className={`${className} cursor-pointer`}
       onClick={onClick}
       disabled={disabled}
-      transition={{ type: "spring", stiffness: 400, damping: 17 }}
       style={style}
     >
+      {icon && <img src={`svg/${icon}.svg`} className="h-4/5 w-6 cursor-pointer" />}
       {text}
     </motion.button>
   );

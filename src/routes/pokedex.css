@@ -1,0 +1,4 @@
+.selected-card {
+  filter: drop-shadow(0 1px 8px rgb(255, 238, 7))
+    drop-shadow(0 1px 1px rgb(255, 208, 21));
+}
