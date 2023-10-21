@@ -6,22 +6,22 @@ import { AppDispatch } from "..";
 type InitialProps = NamedAPIResource[] | [];
 
 const initialState: InitialProps = [];
-export const typePokemonSlice = createSlice({
+export const habitatPokemonSlice = createSlice({
   name: "typePokemon",
   initialState: initialState,
   reducers: {
-    setTypePokemon: (_state, actions) => {
+    setHabitatPokemon: (_state, actions) => {
       return actions.payload;
     },
   },
 });
-export const getTypePokemon = () => (dispatch: AppDispatch) => {
+export const getHabitatPokemon = () => (dispatch: AppDispatch) => {
   axiosInstance
-    .get(`/types`)
+    .get(`/pokemon-habitat`)
     .then(({ data }) => {
-      dispatch(setTypePokemon(data.results));
+      dispatch(setHabitatPokemon(data.results));
     })
-    .catch(() => dispatch(setTypePokemon(initialState)));
+    .catch(() => dispatch(setHabitatPokemon(initialState)));
 };
-export const { setTypePokemon } = typePokemonSlice.actions;
-export default typePokemonSlice.reducer;
+export const { setHabitatPokemon } = habitatPokemonSlice.actions;
+export default habitatPokemonSlice.reducer;

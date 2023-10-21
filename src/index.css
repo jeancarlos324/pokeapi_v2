@@ -5,26 +5,26 @@
   --color-red: #ef4444;
   --color-white: #ffffff;
   --color-gray: rgb(51, 65, 85);
-  --color-normal: "#929DA3";
-  --color-fighting: "#CE416B";
-  --color-flying: "#8FAE";
-  --color-poison: "#AA68";
-  --color-ground: "#D975";
-  --color-rock: "#C5B78C";
-  --color-bug: "#91C12F";
-  --color-ghost: "#5269";
-  --color-steel: "#5A8E";
-  --color-fire: "#FF9D55";
-  --color-water: "#5090D6";
-  --color-grass: "#73CEC0";
-  --color-electric: "#F4D44F";
-  --color-psychic: "#EA551E";
-  --color-ice: "#73CEC0";
-  --color-dragon: "#0B6DC3";
-  --color-dark: "#68A090";
-  --color-fairy: "#EC8FE6";
-  --color-unknown: "#1F4E94";
-  --color-shadow: "#999999";
+  --color-normal: rgb(146, 157, 163);
+  --color-fighting: rgb(206, 65, 107);
+  --color-flying: rgb(143, 174, 222);
+  --color-poison: rgb(135, 56, 185);
+  --color-ground: rgb(217, 117, 85);
+  --color-rock: rgb(197, 183, 140);
+  --color-bug: rgb(145, 193, 47);
+  --color-ghost: rgb(82, 105, 153);
+  --color-steel: rgb(90, 142, 143);
+  --color-fire: rgb(255, 157, 85);
+  --color-water: rgb(80, 144, 214);
+  --color-grass: rgb(115, 206, 192);
+  --color-electric: rgb(244, 212, 79);
+  --color-psychic: rgb(234, 85, 30);
+  --color-ice: rgb(115, 206, 192);
+  --color-dragon: rgb(11, 109, 195);
+  --color-dark: rgb(104, 160, 144);
+  --color-fairy: rgb(236, 143, 230);
+  --color-unknown: rgb(31, 78, 148);
+  --color-shadow: rgb(82, 82, 82);
 }
 
 * {
@@ -161,6 +161,27 @@ option:hover {
     transform: rotate(360deg);
   }
 }
+.swing {
+  animation: rotateRightLeft 3s linear infinite;
+}
+
+@keyframes rotateRightLeft {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(20deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-20deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
 .pagination a {
   color: black;
   float: left;
@@ -262,4 +283,34 @@ option:hover {
 }
 .background-shadow {
   background-color: var(--color-shadow);
+}
+.background-black {
+  background-color: var(--color-shadow);
+}
+.background-blue {
+  background-color: var(--color-dragon);
+}
+.background-brown {
+  background-color: var(--color-rock);
+}
+.background-gray {
+  background-color: var(--color-normal);
+}
+.background-green {
+  background-color: var(--color-grass);
+}
+.background-pink {
+  background-color: var(--color-fairy);
+}
+.background-purple {
+  background-color: var(--color-poison);
+}
+.background-red {
+  background-color: var(--color-psychic);
+}
+.background-white {
+  background-color: var(--color-white);
+}
+.background-yellow {
+  background-color: var(--color-electric);
 }

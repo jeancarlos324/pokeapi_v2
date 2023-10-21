@@ -2,16 +2,22 @@ import { configureStore } from "@reduxjs/toolkit";
 import avatarSlice from "./slice/avatar.slice";
 import loadingScreenSlice from "./slice/loadingScreen";
 import typePokemonSlice from "./slice/typePokemon.slice";
+import colorPokemonSlice from "./slice/colorPokemon.slice";
+import habitatPokemonSlice from "./slice/habitatPokemon.slice";
 import userTrainerSlice from "./slice/userTrainer.slice";
 import pokemonListSlice from "./slice/pokemonList.slice";
+import numberPage from "./slice/numberPage.slice";
 
 const store = configureStore({
   reducer: {
-    pokemon: typePokemonSlice,
+    typePokemonSlice,
+    colorPokemonSlice,
+    habitatPokemonSlice,
     userTrainer: userTrainerSlice,
     avatar: avatarSlice,
     setLoadingScreen: loadingScreenSlice,
     pokemonListSlice,
+    numberPage,
   },
 });
 

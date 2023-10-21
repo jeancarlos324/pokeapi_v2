@@ -35,6 +35,7 @@ module.exports = {
       },
       dropShadow: {
         selected: ["0 1px 8px rgb(255, 238, 7)", "0 1px 1px rgb(255, 208, 21)"],
+        logo: ["0 1px 1px rgba(255, 238, 7,15)", "0 1px 1px rgb(255, 208, 21)"],
         normal: ["0 1px 2px rgb(255, 238, 255)", "0 1px 1px rgb(255, 255, 7)"],
         mitical: ["0 1px 8px rgb(228, 21, 255)", "0 1px 1px rgb(165, 61, 249)"],
         legendary: [

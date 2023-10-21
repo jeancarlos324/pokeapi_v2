@@ -1,12 +1,10 @@
-import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
-// import ChipInfo from "./Chips/ChipInfo";
-// import dataColors from "../../data/dataColors.json";
 import { OtherPokemonSprites, Pokemon } from "pokenode-ts";
 import { DataColor } from "../../types/types";
 import { addToCero } from "../../utils/tools";
 import { motion } from "framer-motion";
 import { dataColor } from "../../utils/dataColor";
+import { axiosInstance } from "../../services/axiosInstance";
 interface CardPokemonProps {
   url: string;
   id?: string;
@@ -28,7 +26,7 @@ const CardPokemon = ({
   const [pokemonStyling, setPokemonStyling] = useState<DataColor[] | null>();
 
   const getPokemon = useCallback(() => {
-    axios.get(url).then((res) => {
+    axiosInstance.get(`pokemon/${url}`).then((res) => {
       const data = res.data as Pokemon;
       setData(data);
       const listColor: DataColor[] = dataColor;
@@ -69,9 +67,9 @@ const CardPokemon = ({
       }}
       animate={{ background: gradiantColor() }}
       className={`flex flex-col bg-no-repeat bg-center
-      ${!loaderImage && "min-h-[330px] sm:min-h-[300px] z-20"}
+      ${!loaderImage && "min-h-[330px] sm:min-h-[300px]"}
        w-full  md:w-[15.2rem]
-      ${!isSelected ? "drop-shadow-selected  opacity-1 z-20" : ""}
+      ${!isSelected ? "drop-shadow-selected  opacity-1" : ""}
       items-center rounded-lg cursor-pointer duration-500 delay-150
        ${className}`}
       onClick={onClick}

@@ -9,6 +9,7 @@ import { addToCero, toCapitalizeCase } from "../../utils/tools";
 import ChipInfo from "../../components/share/chip/ChipInfo";
 import { motion } from "framer-motion";
 import EvolutionCard from "../../components/cards/EvolutionCard";
+import CardSurprice from "../../components/cards/CardSurprice";
 
 const navLanguaje = navigator.language.split("-")[0];
 
@@ -16,13 +17,17 @@ const Details = () => {
   const { name } = useParams();
   const navigate = useNavigate();
   const [character, setCharacter] = useState<Pokemon | null>(null);
+  const [openSurprice, setOpenSurprice] = useState(false);
+  const [openCard, setOpenCard] = useState(true);
   const [species, setSpecies] = useState<PokemonSpecies | null>(null);
   const [pokemonStyle, setPokemonStyle] = useState<DataColor[] | null>();
   const [isActive, setIsActive] = useState(false);
   const [loadingImage, setLoadingImage] = useState(false);
+  const [loader, setLoader] = useState(false);
   const containerRef: RefObject<HTMLDivElement> = useRef(null);
 
   const getCharacter = useCallback(() => {
+    setLoader(true);
     axiosInstance
       .get(`pokemon/${name}/`)
       .then((res) => {
@@ -37,13 +42,15 @@ const Details = () => {
         document.title = `${newTitle} | Pokédex`;
         setPokemonStyle(gradiantColor);
       })
-      .catch(() => navigate("/pokedex"));
+      .catch(() => navigate("/pokedex"))
+      .finally(() => setLoader(false));
   }, [name, navigate]);
 
   useEffect(() => {
     getCharacter();
     return () => {
       document.title = "Pokédex";
+      setOpenSurprice(false);
       // setCharacter(null);
       // setLoadingImage(false);
       // setIsActive(false);
@@ -80,22 +87,24 @@ const Details = () => {
 
   return (
     <div
-      className={`w-full overflow-auto md:min-w-[50%] rounded-lg duration-500 delay-200 relative px-1 pb-10 sm:pb-1 `}
+      className={`w-full ${
+        loader ? "overflow-hidden" : "overflow-auto"
+      } md:min-w-[50%] rounded-lg duration-500 delay-200 relative px-1 pb-10 sm:pb-1 `}
       ref={containerRef}
     >
-      {!loadingImage && (
+      {loader && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="w-full h-full absolute z-40 flex bg-[#F06161ee] backdrop-blur-xl backdrop-opacity-20 duration-500"
+          className="w-full h-full absolute z-20 flex bg-[#F06161ee] backdrop-blur-xl backdrop-opacity-20 duration-500"
         >
           <img src="/svg/loader.svg" className="w-1/6 m-auto" />
         </motion.div>
       )}
       <Button
         text="Go back to pokédex"
-        className="absolute right-5 sm:right-2 top-2 rounded-lg px-3 py-1 bg-[#EF4444] text-[#F2F2F2] cursor-pointer z-20"
+        className="absolute right-5 sm:right-2 top-2 rounded-lg px-3 py-1 bg-[#EF4444] text-[#F2F2F2] cursor-pointer"
         onClick={handleLeavePage}
       />
       <div
@@ -131,7 +140,7 @@ const Details = () => {
             <figure
               id={character.name}
               className={`
-              h-full w-full z-20 lg:scale-[120%]  relative duration-500
+              h-full w-full z-0 lg:scale-[120%]  relative duration-500
               ${!loadingImage ? "opacity-0 scale-0" : "opacity-100 scale-100"}
               ${
                 species?.is_legendary
@@ -146,7 +155,7 @@ const Details = () => {
                   <img
                     src="svg/Signo.svg"
                     alt="question"
-                    className="absolute h-1/2 w-1/2 inset-[6rem] bottom-0  m-auto z-20 cursor-pointer"
+                    className="absolute h-1/2 w-1/2 inset-[6rem] bottom-0  m-auto z-10 cursor-pointer"
                     onClick={handlePickPokemon}
                   />
                   <img
@@ -157,7 +166,7 @@ const Details = () => {
                 </>
               )}
               <img
-                className={`h-full w-full z-10 lg:absolute rounded-3xl right-[-1.5rem] bottom-[-2.5rem] animation-frame
+                className={`h-full w-full z-0 lg:absolute rounded-3xl right-[-1.5rem] bottom-[-2.5rem] animation-frame
               ${!isActive && "brightness-0 "}`}
                 src={getImages("official-artwork")}
                 alt={character.name}
@@ -218,7 +227,11 @@ const Details = () => {
                   {pokemonStyle?.map((type) => (
                     <figure
                       key={type.id}
-                      className="w-10 h-fit flex flex-col items-center "
+                      className="w-10 h-fit flex flex-col items-center"
+                      onClick={() =>
+                        ["pikachu", "charmander"].includes(character.name) &&
+                        setOpenSurprice(!openSurprice)
+                      }
                     >
                       <img
                         className={`h-full w-full rounded-[50%] `}
@@ -233,8 +246,12 @@ const Details = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-center w-full pt-4 lg:pt-12 text-white">
-        <div className="w-full px-1 ">
+      <div
+        className={`${
+          loader && "hidden"
+        } flex flex-col items-center w-full pt-4 lg:pt-12 text-white`}
+      >
+        <div className="w-full px-1">
           <div className="w-full">
             <h3 className="text-2xl font-extrabold pb-2">Stats</h3>
             <div className="grid grid-cols-2 gap-3 grow w-full py-5 px-2 sm:p-5 text-[#2e2e2ed3] bg-slate-200 rounded-md">
@@ -256,6 +273,15 @@ const Details = () => {
               ))}
             </div>
           </div>
+          {openSurprice && (
+            <div className="relative w-full">
+              <img
+                src="/image/surprice.jpeg"
+                className="absolute z-10 w-12 right-0 top-2"
+                onClick={() => setOpenCard(true)}
+              />
+            </div>
+          )}
           <div>
             <h3 className="text-2xl py-3">Evolutions</h3>
             {species && (
@@ -268,6 +294,10 @@ const Details = () => {
         </div>
         <div className="w-full h-12"></div>
       </div>
+      <CardSurprice
+        isOpen={openCard}
+        onChangeStatus={() => setOpenCard(false)}
+      />
     </div>
   );
 };

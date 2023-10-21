@@ -2,6 +2,7 @@ import { MotionStyle, motion } from "framer-motion";
 interface ButtonProps {
   text?: string;
   className?: string;
+  iconClassName?: string;
   onClick?: () => void;
   disabled: boolean;
   icon?: string;
@@ -11,6 +12,7 @@ interface ButtonProps {
 const Button = ({
   text,
   className,
+  iconClassName,
   onClick,
   disabled,
   icon,
@@ -23,7 +25,12 @@ const Button = ({
       disabled={disabled}
       style={style}
     >
-      {icon && <img src={`svg/${icon}.svg`} className="h-4/5 w-6 cursor-pointer" />}
+      {icon && (
+        <img
+          src={`svg/${icon}.svg`}
+          className={`${iconClassName} h-4/5 w-6 cursor-pointer`}
+        />
+      )}
       {text}
     </motion.button>
   );

@@ -17,9 +17,9 @@ const pokemonListSlice = createSlice({
   },
 });
 
-export const getListPokemon = () => (dispatch: AppDispatch) => {
+export const getListPokemon = (dispatch: AppDispatch) => {
   axiosInstance
-    .get(`/pokemon?limit=400&offset=0`)
+    .get(`/pokemon?limit=600&offset=0`)
     .then(({ data }) => {
       dispatch(setPokemonList(data.results));
     })
