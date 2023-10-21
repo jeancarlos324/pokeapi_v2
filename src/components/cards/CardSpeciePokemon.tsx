@@ -7,7 +7,6 @@ interface CardSpeciePokemonProps {
 
 const CardSpeciePokemon = ({ id }: CardSpeciePokemonProps) => {
   const [species, setSpecies] = useState<PokemonSpecies | null>(null);
-  const navLanguaje = navigator.language.split("-")[0];
   useEffect(() => {
     axiosInstance
       .get(`/pokemon-species/${id}`)

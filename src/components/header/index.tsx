@@ -10,7 +10,7 @@ import CardViewTypes from "../cards/CardViewTypes";
 
 const HeaderPage = () => {
   const [searchValue, setSearchValue] = useState("");
-  const [isOpenViewTypes, setIsOpenViewTypes] = useState(true);
+  const [isOpenViewTypes, setIsOpenViewTypes] = useState(false);
   const pokemons = useSelector((state: RootState) => state.pokemonListSlice);
   const navigate = useNavigate();
   const dispatch = useDispatch();

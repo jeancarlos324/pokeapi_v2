@@ -4,7 +4,7 @@ export const avatarSlice = createSlice({
   name: "username",
   initialState: "",
   reducers: {
-    changeAvatar: (state,actions) =>{
+    changeAvatar: (_state,actions) =>{
       return actions.payload;
     }
   },

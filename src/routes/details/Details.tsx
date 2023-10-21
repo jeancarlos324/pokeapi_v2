@@ -18,7 +18,7 @@ const Details = () => {
   const navigate = useNavigate();
   const [character, setCharacter] = useState<Pokemon | null>(null);
   const [openSurprice, setOpenSurprice] = useState(false);
-  const [openCard, setOpenCard] = useState(true);
+  const [openCard, setOpenCard] = useState(false);
   const [species, setSpecies] = useState<PokemonSpecies | null>(null);
   const [pokemonStyle, setPokemonStyle] = useState<DataColor[] | null>();
   const [isActive, setIsActive] = useState(false);

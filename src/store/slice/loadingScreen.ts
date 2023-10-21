@@ -4,7 +4,7 @@ export const loadingScreenSlice = createSlice({
   name: "loadingscreen",
   initialState: false,
   reducers: {
-    setLoadingScreen: (state, actions) => {
+    setLoadingScreen: (_state, actions) => {
       return actions.payload;
     },
   },
