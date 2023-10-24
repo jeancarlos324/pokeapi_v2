@@ -7,10 +7,12 @@ import { quantityPerPage } from "../../routes/Pokedex";
 import { setNumberPageSlice } from "../../store/slice/numberPage.slice";
 import Button from "../share/Button";
 import CardViewTypes from "../cards/CardViewTypes";
+import CardViewOptions from "../cards/CardViewOptions";
 
 const HeaderPage = () => {
   const [searchValue, setSearchValue] = useState("");
   const [isOpenViewTypes, setIsOpenViewTypes] = useState(false);
+  const [isOpenOptions, setIsOpenOptions] = useState(false);
   const pokemons = useSelector((state: RootState) => state.pokemonListSlice);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -37,8 +39,10 @@ const HeaderPage = () => {
   };
   const handleCloseModal = () => setIsOpenViewTypes(false);
   const handleOpenModal = () => setIsOpenViewTypes(true);
+  const handleCloseOptions = () => setIsOpenOptions(false);
+  const handleOpenOptions = () => setIsOpenOptions(!isOpenOptions);
   return (
-    <div className="h-[6vh] md:h-[10vh] sticky  top-0 bg-red-500 z-10">
+    <div className="h-[6vh] md:h-[10vh] bg-red-500 z-10">
       <div className="flex gap-2 justify-between md:justify-end items-center px-1 container mx-auto h-full">
         <div className="grow flex justify-start">
           <figure className="flex items-center font-extrabold text-2xl bg-[#3333337d] px-2 rounded-md ">
@@ -57,10 +61,11 @@ const HeaderPage = () => {
             duration-500 hover:border-[#f2f2f2] border-2 hover:bg-red-500 hover:text-[#f2f2f2]"
             icon="caret"
             text="Show advance options..."
-            onClick={handleOpenModal}
+            onClick={handleOpenOptions}
           />
+          {isOpenOptions && <CardViewOptions  onChangeStatus={handleCloseOptions}/>}
         </div>
-        <div className="relative flex gap-2 grow sm:grow-0  md:w-1/3 xl:w-1/5">
+        <div className="relative flex gap-2 grow sm:grow-0  md:w-1/3 xl:w-1/5 z-10">
           <label
             htmlFor="pokemon"
             className="grow flex bg-[#e2e2e2] border-2 rounded-md p-1"
