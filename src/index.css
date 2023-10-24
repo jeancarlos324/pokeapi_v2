@@ -30,7 +30,7 @@
 * {
   font-family: "Exo", sans-serif;
 
-  cursor: url("svg/cursor-red.svg"), auto;
+  cursor: url("/svg/cursor-red.svg"), auto;
 }
 input {
   outline: transparent;
