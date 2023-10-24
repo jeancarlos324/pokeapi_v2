@@ -8,6 +8,7 @@ import { setNumberPageSlice } from "../../store/slice/numberPage.slice";
 import Button from "../share/Button";
 import CardViewTypes from "../cards/CardViewTypes";
 import CardViewOptions from "../cards/CardViewOptions";
+import { getListPokemon } from "../../store/slice/pokemonList.slice";
 
 const HeaderPage = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -41,11 +42,15 @@ const HeaderPage = () => {
   const handleOpenModal = () => setIsOpenViewTypes(true);
   const handleCloseOptions = () => setIsOpenOptions(false);
   const handleOpenOptions = () => setIsOpenOptions(!isOpenOptions);
+  const getPokemons = () => getListPokemon(dispatch);
   return (
     <div className="h-[6vh] md:h-[10vh] bg-red-500 z-10">
       <div className="flex gap-2 justify-between md:justify-end items-center px-1 container mx-auto h-full">
         <div className="grow flex justify-start">
-          <figure className="flex items-center font-extrabold text-2xl bg-[#3333337d] px-2 rounded-md ">
+          <figure
+            className="flex items-center font-extrabold text-2xl bg-[#3333337d] px-2 rounded-md hover:scale-105 duration-700"
+            onClick={getPokemons}
+          >
             <span className="text-[#f2f2f2]  hidden md:block">Pokedex</span>
             <span className="text-[#f2f2f2]  md:hidden">Px</span>
             <img
@@ -63,7 +68,9 @@ const HeaderPage = () => {
             text="Show advance options..."
             onClick={handleOpenOptions}
           />
-          {isOpenOptions && <CardViewOptions  onChangeStatus={handleCloseOptions}/>}
+          {isOpenOptions && (
+            <CardViewOptions onChangeStatus={handleCloseOptions} />
+          )}
         </div>
         <div className="relative flex gap-2 grow sm:grow-0  md:w-1/3 xl:w-1/5 z-10">
           <label
