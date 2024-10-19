@@ -141,4 +141,11 @@ export const dataColor: DataColor[] = [
     image:
       "https://cdn1.iconfinder.com/data/icons/essential-tool-4/60/FAQ__help__question__unknown__sign-512.png",
   },
+  {
+    id: "20",
+    name: "stellar",
+    color: "#999999",
+    image:
+      "https://cdn1.iconfinder.com/data/icons/essential-tool-4/60/FAQ__help__question__unknown__sign-512.png",
+  },
 ];
